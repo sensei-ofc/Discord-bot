@@ -1,34 +1,34 @@
 module.exports = (db) => {
 
-    // Crtl + C
+    // Ctrl + C
     process.on('SIGINT', () => {
         console.log();
-        error('SIGINT: Exiting...');
+        error('SIGINT: Saliendo...');
         process.exit();
     });
 
-    // Standard crash
+    // Error estándar
     process.on('uncaughtException', (err) => {
-        error(`UNCAUGHT EXCEPTION: ${err.stack}`);
+        error(`EXCEPCIÓN NO CONTROLADA: ${err.stack}`);
     });
 
-    // Killed process
+    // Proceso terminado
     process.on('SIGTERM', () => {
-        error('SIGTERM: Closing database and exiting...');
+        error('SIGTERM: Cerrando la base de datos y saliendo...');
         process.exit();
     });
 
-    // Standard crash
+    // Rechazo no manejado
     process.on('unhandledRejection', (err) => {
-        error(`UNHANDLED REJECTION: ${err.stack}`);
+        error(`RECHAZO NO MANEJADO: ${err.stack}`);
     });
 
-    // Deprecation warnings
+    // Advertencias de deprecación
     process.on('warning', (warning) => {
         warn(warning);
     });
 
-    // Reference errors
+    // Errores de referencia
     process.on('uncaughtReferenceError', (err) => {
         error(err.stack);
     });
@@ -44,7 +44,7 @@ function error(message) {
 }
 
 function warn(message) {
-    client.logs.warn(`[WARN] ${message}`);
+    client.logs.warn(`[ADVERTENCIA] ${message}`);
 }
 
-client.logs.success(`[PROCESS] Process handlers loaded.`);
+client.logs.success(`[PROCESO] Controladores de proceso cargados.`);
