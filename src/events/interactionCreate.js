@@ -27,17 +27,17 @@ module.exports = {
 
         const command = client.commands.get(interaction.commandName);
 
-        if (!command) return
+        if (!command) return;
         
-        try{
+        try {
             await command.execute(interaction, client);
         } catch (error) {
 
-            console.error(`${color.red}[${getTimestamp()}] [INTERACTION_CREATE] Error while executing command. \n${color.red}[${getTimestamp()}] [INTERACTION_CREATE] Please check you are using the correct execute method: "async execute(interaction, client)":`, error);
+            console.error(`${color.red}[${getTimestamp()}] [INTERACTION_CREATE] Error al ejecutar el comando. \n${color.red}[${getTimestamp()}] [INTERACTION_CREATE] Por favor, verifica que estás usando el método correcto de ejecución: "async execute(interaction, client)":`, error);
 
             const embed = new EmbedBuilder()
-            .setColor("Red")
-            .setDescription(`There was an error while executing this command!\n\`\`\`${error}\`\`\``);
+                .setColor("Red")
+                .setDescription(`¡Hubo un error al ejecutar este comando!\n\`\`\`${error}\`\`\``);
 
             await interaction.reply({ embeds: [embed], ephemeral: true });
         } 
