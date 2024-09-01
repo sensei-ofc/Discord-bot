@@ -9,7 +9,7 @@ module.exports = {
     once: true,
     async execute(client) {
 
-        client.logs.info(`[SCHEMAS] Started loading schemas...`);
+        client.logs.info(`[SCHEMAS] Iniciando la carga de esquemas...`);
 
         if (!mongodbURL) return;
 
@@ -44,15 +44,15 @@ module.exports = {
         };
 
         if (mongoose.connect) {
-            client.logs.success('[DATABASE] Connected to MongoDB successfully.')
+            client.logs.success('[DATABASE] Conectado a MongoDB con éxito.')
 
             const schemaFolder = path.join(__dirname, '../schemas'); 
             fs.readdir(schemaFolder, (err, files) => {
                 if (err) {
-                    client.logs.error('[ERROR] Error reading schemas folder:', err);
+                    client.logs.error('[ERROR] Error al leer la carpeta de esquemas:', err);
                     return;
                 }
-                client.logs.success(`[SCHEMAS] Loaded ${files.length} schema files.`);
+                client.logs.success(`[SCHEMAS] Cargados ${files.length} archivos de esquemas.`);
             });
         }
 
@@ -65,18 +65,18 @@ module.exports = {
         console.log(`${color.pink}[${getTimestamp()}] ╚═════╝ ╚══════╝  ╚═══╝      ╚═════╝    ╚═╝       ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝   ╚═╝   `);
         console.log(`${color.pink}[${getTimestamp()}] =========================================================================================================`);
 
-        client.logs.logging(`[BOT] ${client.user.username} has been launched!`);
-        client.logs.info(`[EVENTS] Started loading events...`)
-        client.logs.success(`[EVENTS] Loaded ${client.eventNames().length} events.`);
+        client.logs.logging(`[BOT] ¡${client.user.username} ha sido lanzado!`);
+        client.logs.info(`[EVENTS] Iniciando la carga de eventos...`)
+        client.logs.success(`[EVENTS] Cargados ${client.eventNames().length} eventos.`);
         
         const triggerFolder = path.join(__dirname, '../triggers'); 
         fs.readdir(triggerFolder, (err, files) => {
             if (err) {
-                client.logs.error('Error reading trigger folder:', err);
+                client.logs.error('Error al leer la carpeta de triggers:', err);
                 return;
             }
-            client.logs.info(`[TRIGGERS] Started loading triggers...`);
-            client.logs.success(`[TRIGGERS] Loaded ${files.length} trigger files.`);
+            client.logs.info(`[TRIGGERS] Iniciando la carga de triggers...`);
+            client.logs.success(`[TRIGGERS] Cargados ${files.length} archivos de triggers.`);
         });
 
         require('events').EventEmitter.defaultMaxListeners = config.eventListeners;
