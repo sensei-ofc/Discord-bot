@@ -2,8 +2,8 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
-    .setName('bot-uptime')
-    .setDescription(`Displays the bots current uptime.`),
+        .setName('bot-uptime')
+        .setDescription('Muestra el tiempo de actividad actual del bot.'),
     async execute(interaction, client) {
 
         let totalSeconds = (client.uptime / 1000);
@@ -17,15 +17,15 @@ module.exports = {
         let uptime = `**${days}**d **${hours}**h **${minutes}**m **${seconds}**s`;
 
         const uptimeEmbed = new EmbedBuilder()
-        .setAuthor({ name: `${client.user.username} uptime ${client.config.devBy}`})
-        .setColor(client.config.embedColor)
-        .setTitle('⏳ **Current uptime**')
-        .addFields({ name: "Uptime", value: `> ${uptime}`})
-        .setThumbnail(client.user.avatarURL())
-        .setFooter({ text: `Uptime command`})
-        .setTimestamp()
+            .setAuthor({ name: `Tiempo de actividad de ${client.user.username} ${client.config.devBy}`})
+            .setColor(client.config.embedColor)
+            .setTitle('⏳ **Tiempo de actividad actual**')
+            .addFields({ name: "Tiempo de actividad", value: `> ${uptime}`})
+            .setThumbnail(client.user.avatarURL())
+            .setFooter({ text: 'Comando de tiempo de actividad' })
+            .setTimestamp()
 
-        await interaction.reply({ content: "Message sent to channel", ephemeral: true});
-        await interaction.channel.send({ embeds: [uptimeEmbed]});
+        await interaction.reply({ content: "Mensaje enviado en el canal", ephemeral: true });
+        await interaction.channel.send({ embeds: [uptimeEmbed] });
     },
 };
