@@ -2,7 +2,7 @@ const { REST } = require("@discordjs/rest");
 const { Routes } = require('discord-api-types/v9');
 const fs = require('fs');
 const ascii = require("ascii-table");
-const table = new ascii().setHeading("File Name", "Status");
+const table = new ascii().setHeading("Nombre del Archivo", "Estado");
 
 const clientId = process.env.clientid; 
 const guildId = process.env.guildid; 
@@ -19,9 +19,9 @@ module.exports = (client) => {
 
                 if (command.name) {
                     client.commands.set(command.name, command);
-                    table.addRow(file, "Loaded");
+                    table.addRow(file, "Cargado");
                 } else {
-                    table.addRow(file, "Loaded");
+                    table.addRow(file, "Cargado");
                     continue;
                 }
             }
@@ -47,7 +47,7 @@ module.exports = (client) => {
             return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
         }
 
-        console.log(`${color.blue}${table.toString()} \n[${getTimestamp()}] ${color.reset}[COMMANDS] Loaded ${client.commands.size} SlashCommands.`);
+        console.log(`${color.blue}${table.toString()} \n[${getTimestamp()}] ${color.reset}[COMANDOS] Cargados ${client.commands.size} SlashCommands.`);
 
         const rest = new REST({
             version: '9'
@@ -55,20 +55,20 @@ module.exports = (client) => {
 
         (async () => {
             try {
-                client.logs.info(`[FUNCTION] Started refreshing application (/) commands.`);
+                client.logs.info(`[FUNCIÓN] Iniciando la actualización de comandos de aplicación (/).`);
 
                 await rest.put(
                     Routes.applicationCommands(clientId), {
                         body: client.commandArray
                     },
                 ).catch((error) => {
-                    console.error(`${color.red}[${getTimestamp()}] [FUNCTION] Error while refreshing application (/) commands. \n${color.red}[${getTimestamp()}] [FUNCTION] Check if your clientID is correct and matches your bots token:`, error);
+                    console.error(`${color.red}[${getTimestamp()}] [FUNCIÓN] Error al actualizar los comandos de aplicación (/). \n${color.red}[${getTimestamp()}] [FUNCIÓN] Verifica si tu clientID es correcto y coincide con el token de tu bot:`, error);
                 });
 
-                client.logs.success(`[FUNCTION] Successfully reloaded application (/) commands.`);
+                client.logs.success(`[FUNCIÓN] Comandos de aplicación (/) recargados con éxito.`);
             } catch (error) {
                 console.error(error);
-                client.logs.error('[FUNCTION] Error loading slash commands.', error);
+                client.logs.error('[FUNCIÓN] Error al cargar los comandos slash.', error);
             }
         })();
     };
