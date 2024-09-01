@@ -9,10 +9,10 @@ module.exports = {
             embeds: [
                 new EmbedBuilder()
                 .setAuthor({ name: `${client.user.username} ${client.config.devBy}`})
-                .setTitle(`${client.user.username} **prefix** commands | **My prefix**: \`\`${client.config.prefix}\`\``)
+                .setTitle(`${client.user.username} **comandos de prefijo** | **Mi prefijo**: \`\`${client.config.prefix}\`\``)
                 .setDescription(client.pcommands.map(cmd => `> ${cmd.name}`).join('\n'))
                 .setColor(client.config.embedColor)
-                .setFooter({ text: `Watching over ${client.pcommands.size} commands.`})
+                .setFooter({ text: `Observando ${client.pcommands.size} comandos.`})
                 .setTimestamp()
             ]
         });
