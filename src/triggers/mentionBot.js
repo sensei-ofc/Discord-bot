@@ -12,14 +12,14 @@ module.exports = {
         const commandList = commands.map((command) => `> **/${command.data.name}**: ${command.data.description}`).join('\n');
         
         const pingEmbed = new EmbedBuilder()
-        .setAuthor({ name: `${client.user.username} ${client.config.devBy}`})
-        .setTitle(`Hello I am ${client.user.username}, check out my commands below!`)
-        .setDescription(`${commandList}`)
-        .setColor(config.embedColor)
-        .setFooter({ text: `Watching over ${client.commands.size} commands.`})
-        .setTimestamp()
+            .setAuthor({ name: `${client.user.username} ${client.config.devBy}`})
+            .setTitle(`¡Hola! Soy ${client.user.username}, ¡mira mis comandos a continuación!`)
+            .setDescription(`${commandList}`)
+            .setColor(config.embedColor)
+            .setFooter({ text: `Supervisando ${client.commands.size} comandos.`})
+            .setTimestamp();
 
-        return message.reply({ content: `Hey, <@${message.author.id}> pinged me!`, embeds: [pingEmbed]});
+        return message.reply({ content: `¡Hola, <@${message.author.id}> me mencionó!`, embeds: [pingEmbed]});
         
         }
     },
