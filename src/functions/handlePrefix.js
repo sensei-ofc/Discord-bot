@@ -1,6 +1,6 @@
 const ascii = require("ascii-table");
 const fs = require("fs");
-const table = new ascii().setHeading("File Name", "Status");
+const table = new ascii().setHeading("Nombre del Archivo", "Estado");
 
 module.exports = (client) => {
     client.prefixCommands = async (eventFile, path) => {
@@ -15,7 +15,7 @@ module.exports = (client) => {
     
         if (command.name) {
             client.pcommands.set(command.name, command);
-            table.addRow(file, "Loaded");
+            table.addRow(file, "Cargado");
     
             if (command.aliases && Array.isArray(command.aliases)) {
                 command.aliases.forEach((alias) => {
@@ -29,7 +29,7 @@ module.exports = (client) => {
             }
         }  
 
-        client.logs.info(`[FUNCTION] Started refreshing prefix (?) commands.`);
+        client.logs.info(`[FUNCIÓN] Comenzó la actualización de comandos con prefijo (?).`);
 
         const color = {
             red: '\x1b[31m',
@@ -51,11 +51,11 @@ module.exports = (client) => {
             return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
         }
 
-        console.log(`${color.orange}${table.toString()} \n[${getTimestamp()}] ${color.reset}[PREFIX_COMMANDS] Loaded ${client.pcommands.size} PrefixCommands.`);
+        console.log(`${color.orange}${table.toString()} \n[${getTimestamp()}] ${color.reset}[COMANDOS_CON_PREFIJO] Cargados ${client.pcommands.size} comandos con prefijo.`);
 
         (async () => {
             try {
-                client.logs.success(`[FUNCTION] Successfully reloaded prefix (?) commands.`);
+                client.logs.success(`[FUNCIÓN] Comandos con prefijo (?) recargados exitosamente.`);
             } catch (error) {
                 console.error(error);
             }
