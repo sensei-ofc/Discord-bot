@@ -28,7 +28,7 @@ async function getLatestVersion() {
         const latestVersion = response.data.tag_name;
         return latestVersion;
     } catch (error) {
-        console.error(`${color.torquise}[${getTimestamp()}] [LATEST_VERSION] Error while retrieving the latest version, ${color.reset}`, error);
+        console.error(`${color.torquise}[${getTimestamp()}] [ULTIMA_VERSIÓN] Error al recuperar la última versión, ${color.reset}`, error);
         return null;
     }
 }
@@ -36,9 +36,9 @@ async function getLatestVersion() {
 function checkVersion(currentVersion) {
     getLatestVersion().then((latestVersion) => {
         if (currentVersion < latestVersion) {
-            console.log(`${color.torquise}[${getTimestamp()}] [LATEST_VERSION] Attention, a new update is available, please install it - https://github.com/Kkkermit/DiscordBotV14-template`);
+            console.log(`${color.torquise}[${getTimestamp()}] [ULTIMA_VERSIÓN] Atención, hay una nueva actualización disponible, por favor instálala - https://github.com/Kkkermit/DiscordBotV14-template`);
         } else {
-            console.log(`${color.torquise}[${getTimestamp()}] [LATEST_VERSION] You have the latest version of the code.`);
+            console.log(`${color.torquise}[${getTimestamp()}] [ULTIMA_VERSIÓN] Tienes la última versión del código.`);
         }
     });
 }
