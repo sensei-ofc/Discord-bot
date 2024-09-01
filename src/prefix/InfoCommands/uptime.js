@@ -16,14 +16,14 @@ module.exports = {
         let uptime = `**${days}**d **${hours}**h **${minutes}**m **${seconds}**s`;
 
         const uptimeEmbed = new EmbedBuilder()
-        .setAuthor({ name: `${client.user.username} uptime ${client.config.devBy}`})
-        .setColor(client.config.embedColor)
-        .setTitle('⏳ **Current uptime**')
-        .addFields({ name: "Uptime", value: `> ${uptime}`})
-        .setThumbnail(client.user.avatarURL())
-        .setFooter({ text: `Uptime command`})
-        .setTimestamp()
+            .setAuthor({ name: `${client.user.username} tiempo activo ${client.config.devBy}` })
+            .setColor(client.config.embedColor)
+            .setTitle('⏳ **Tiempo Activo Actual**')
+            .addFields({ name: "Tiempo Activo", value: `> ${uptime}` })
+            .setThumbnail(client.user.avatarURL())
+            .setFooter({ text: `Comando de tiempo activo` })
+            .setTimestamp();
 
-        message.channel.send({ embeds: [uptimeEmbed]});
+        message.channel.send({ embeds: [uptimeEmbed] });
     }
 }
