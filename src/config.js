@@ -1,16 +1,14 @@
 module.exports = {
-    
-    // Bot Information //
+    // Información del bot //
     prefix: '?',
-    status: "dnd",
+    status: 'dnd', // 'dnd' es una abreviatura de "Do Not Disturb" (No Molestar)
     eventListeners: 100,
-    embedColor: "Blurple",
-    dev: "Kkermit",
-    devBy: "| Developed by kkermit",
-    noPermsMessage: `You **do not** have the permission to do that!`,
+    embedColor: 'Blurple', // El color 'Blurple' puede ser 'Blurple' o el código hexadecimal si se prefiere
+    dev: 'Kkermit',
+    devBy: '| Desarrollado por Kkermit', // Cambio a español para mayor consistencia
+    noPermsMessage: '¡No tienes permiso para hacer eso!',
 
-    // Logging Channels //
-    slashCommandLoggingChannel: "1129094438669520956",
-    prefixCommandLoggingChannel: "1129094438669520956",
-
-}
+    // Canales de registro //
+    slashCommandLoggingChannel: '1129094438669520956',
+    prefixCommandLoggingChannel: '1129094438669520956',
+};
