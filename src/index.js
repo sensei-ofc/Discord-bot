@@ -1,17 +1,9 @@
-
-// ██████╗ ███████╗██╗   ██╗    ██████╗ ██╗   ██╗    ██╗  ██╗██╗  ██╗███████╗██████╗ ███╗   ███╗██╗████████╗
-// ██╔══██╗██╔════╝██║   ██║    ██╔══██╗╚██╗ ██╔╝    ██║ ██╔╝██║ ██╔╝██╔════╝██╔══██╗████╗ ████║██║╚══██╔══╝
-// ██║  ██║█████╗  ██║   ██║    ██████╔╝ ╚████╔╝     █████╔╝ █████╔╝ █████╗  ██████╔╝██╔████╔██║██║   ██║   
-// ██║  ██║██╔══╝  ╚██╗ ██╔╝    ██╔══██╗  ╚██╔╝      ██╔═██╗ ██╔═██╗ ██╔══╝  ██╔══██╗██║╚██╔╝██║██║   ██║   
-// ██████╔╝███████╗ ╚████╔╝     ██████╔╝   ██║       ██║  ██╗██║  ██╗███████╗██║  ██║██║ ╚═╝ ██║██║   ██║   
-// ╚═════╝ ╚══════╝  ╚═══╝      ╚═════╝    ╚═╝       ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝   ╚═╝   
-
 const { 
     Client, GatewayIntentBits, EmbedBuilder, PermissionsBitField, Permissions, MessageManager, Embed, Collection, Events, Partials, ActivityType, Activity, AuditLogEvent, ActionRowBuilder, StringSelectMenuBuilder, ButtonBuilder, ButtonStyle, ComponentType, AttachmentBuilder, ModalBuilder, TextInputBuilder, TextInputStyle, ChannelType
     } = require(`discord.js`);
 const fs = require('fs');
 
-// Current Repo Version //
+// Versión actual del repositorio //
 
 const currentVersion = "v2.0.2";
 
@@ -54,17 +46,17 @@ client.config = require('./config');
 
 const { checkVersion } = require('./lib/version')
 
-// Rotating Activity //
+// Actividad Rotativa //
 
 client.on("ready", async (client) => {
     try {
         setInterval(() => {
 
             let activities = [
-                { type: 'Watching', name: `${client.commands.size} slash commands!`},
-                { type: 'Watching', name: `${client.pcommands.size} prefix commands!`},
-                { type: 'Watching', name: `${client.guilds.cache.size} servers!`},
-                { type: 'Watching', name: `${client.guilds.cache.reduce((a,b) => a+b.memberCount, 0)} members!`},
+                { type: 'Watching', name: `${client.commands.size} comandos slash!`},
+                { type: 'Watching', name: `${client.pcommands.size} comandos con prefijo!`},
+                { type: 'Watching', name: `${client.guilds.cache.size} servidores!`},
+                { type: 'Watching', name: `${client.guilds.cache.reduce((a,b) => a+b.memberCount, 0)} miembros!`},
                 { type: 'Playing', name: `${client.config.prefix}help | @${client.user.username}`},
             ];
 
@@ -76,20 +68,20 @@ client.on("ready", async (client) => {
                 client.user.setPresence({ activities: [{ name: `${status.name}`, type: ActivityType.Playing }]});
             } 
         }, 7500);
-        client.logs.success(`[STATUS] Rotating status loaded successfully.`);
+        client.logs.success(`[STATUS] Estado rotativo cargado con éxito.`);
     } catch (error) {
-        client.logs.error(`[STATUS] Error while loading rotating status.`);
+        client.logs.error(`[STATUS] Error al cargar el estado rotativo.`);
     };
 });
 
-// Status //
+// Estado //
 
 client.on("ready", () => {
     try {
         client.user.setStatus(client.config.status);
-        client.logs.success(`[STATUS] Bot status loaded as ${client.config.status}.`);
+        client.logs.success(`[STATUS] Estado del bot cargado como ${client.config.status}.`);
     } catch (error) {
-        client.logs.error(`[STATUS] Error while loading bot status.`);
+        client.logs.error(`[STATUS] Error al cargar el estado del bot.`);
     };
 });
 
@@ -118,11 +110,11 @@ const commandFolders = fs.readdirSync("./src/commands");
     client.login(process.env.token).then(() => {
         checkVersion(currentVersion);
     }).catch((error) => {
-        console.error(`${color.red}[${getTimestamp()}]${color.reset} [LOGIN] Error while logging in. Check if your token is correct or double check your also using the correct intents. \n${color.red}[${getTimestamp()}]${color.reset} [LOGIN]`, error);
+        console.error(`${color.red}[${getTimestamp()}]${color.reset} [LOGIN] Error al iniciar sesión. Verifica si tu token es correcto o revisa también si estás utilizando los intents correctos. \n${color.red}[${getTimestamp()}]${color.reset} [LOGIN]`, error);
     });
 })();
 
-// Logging Effects //
+// Efectos de Registro //
 
 const color = {
     red: '\x1b[31m',
@@ -147,7 +139,7 @@ function getTimestamp() {
     return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 };
 
-// Guild Create //
+// Creación de Guild //
 
 client.on("guildCreate", async guild => {
     try{ 
@@ -158,13 +150,13 @@ client.on("guildCreate", async guild => {
 
         await guild.fetchOwner().then(({ user }) => { theowner = user; }).catch(() => {});
 
-        console.log(`${color.orange}[${getTimestamp()}]${color.reset} [GUILD_CREATE] ${client.user.username} has been added to a new guild. \n${color.orange}> GuildName: ${guild.name} \n> GuildID: ${guild.id} \n> Owner: ${theowner ? `${theowner.tag} (${theowner.id})` : `${theowner} (${guild.ownerId})`} \n> MemberCount: ${guild.memberCount} \n> ServerNumber: ${client.guilds.cache.size} \n> ServerInvite: ${invite}`)
+        console.log(`${color.orange}[${getTimestamp()}]${color.reset} [GUILD_CREATE] ${client.user.username} ha sido añadido a un nuevo guild. \n${color.orange}> Nombre del Guild: ${guild.name} \n> ID del Guild: ${guild.id} \n> Propietario: ${theowner ? `${theowner.tag} (${theowner.id})` : `${theowner} (${guild.ownerId})`} \n> Número de Miembros: ${guild.memberCount} \n> Número de Servidores: ${client.guilds.cache.size} \n> Invitación del Servidor: ${invite}`)
     } catch (error) {
-        client.logs.error(`[GUILD_CREATE] Error while logging guild creation.`);
+        client.logs.error(`[GUILD_CREATE] Error al registrar la creación del guild.`);
     }
 });
 
-// Guild Delete //
+// Eliminación de Guild //
 
 client.on("guildDelete", async guild => {
     try {
@@ -172,13 +164,13 @@ client.on("guildDelete", async guild => {
 
         await guild.fetchOwner().then(({ user }) => { theowner = user; }).catch(() => {});
 
-        console.log(`${color.blue}[${getTimestamp()}]${color.reset} [GUILD_DELETE] ${client.user.username} has left a guild. \n${color.blue}> GuildName: ${guild.name} \n> GuildID: ${guild.id} \n> Owner: ${theowner ? `${theowner.tag} (${theowner.id})` : `${theowner} (${guild.ownerId})`} \n> MemberCount: ${guild.memberCount}`)
+        console.log(`${color.blue}[${getTimestamp()}]${color.reset} [GUILD_DELETE] ${client.user.username} ha salido de un guild. \n${color.blue}> Nombre del Guild: ${guild.name} \n> ID del Guild: ${guild.id} \n> Propietario: ${theowner ? `${theowner.tag} (${theowner.id})` : `${theowner} (${guild.ownerId})`} \n> Número de Miembros: ${guild.memberCount}`)
     } catch (error) {
-        client.logs.error(`[GUILD_DELETE] Error while logging guild deletion.`);
+        client.logs.error(`[GUILD_DELETE] Error al registrar la eliminación del guild.`);
     }
 });
 
-// Command Logging //
+// Registro de Comandos //
 
 client.on(Events.InteractionCreate, async interaction => {
     
@@ -194,18 +186,18 @@ client.on(Events.InteractionCreate, async interaction => {
 
         const embed = new EmbedBuilder()
         .setColor(client.config.embedColor)
-        .setAuthor({ name: `${user} has used a command.`, iconURL: client.user.avatarURL({ dynamic: true })})
-        .setTitle(`${client.user.username} Command Logger`)
-        .addFields({ name: 'Server Name', value: `${server}`})
-        .addFields({ name: 'Command', value: `\`\`\`${interaction}\`\`\``})
-        .addFields({ name: 'User', value: `${user} | ${userID}`})
+        .setAuthor({ name: `${user} ha usado un comando.`, iconURL: client.user.avatarURL({ dynamic: true })})
+        .setTitle(`${client.user.username} Registro de Comandos`)
+        .addFields({ name: 'Nombre del Servidor', value: `${server}`})
+        .addFields({ name: 'Comando', value: `\`\`\`${interaction}\`\`\``})
+        .addFields({ name: 'Usuario', value: `${user} | ${userID}`})
         .setTimestamp()
-        .setFooter({ text: `Command Logger ${client.config.devBy}`, iconURL: interaction.user.avatarURL({ dynamic: true })})
+        .setFooter({ text: `Registro de Comandos ${client.config.devBy}`, iconURL: interaction.user.avatarURL({ dynamic: true })})
 
         await channel.send({ embeds: [embed] });
-        console.log(`${color.torquise}[${getTimestamp()}]${color.reset} [SLASH_COMMAND_USED] ${user} has used a command. \n${color.torquise}> Server: ${server} \n> Command: ${interaction} \n> User: ${user} \n> UserID: ${userID}`)
+        console.log(`${color.torquise}[${getTimestamp()}]${color.reset} [SLASH_COMMAND_USED] ${user} ha usado un comando. \n${color.torquise}> Servidor: ${server} \n> Comando: ${interaction} \n> Usuario: ${user} \n> ID del Usuario: ${userID}`)
     } catch (error) {
-        client.logs.error(`[SLASH_COMMAND_USED] Error while logging command usage. Check if you have the correct channel ID in your config.`);
+        client.logs.error(`[SLASH_COMMAND_USED] Error al registrar el uso del comando. Verifica si tienes el ID de canal correcto en tu configuración.`);
     }};
 });
 
@@ -222,17 +214,17 @@ client.on(Events.MessageCreate, async message => {
 
         const embed = new EmbedBuilder()
         .setColor(client.config.embedColor)
-        .setAuthor({ name: `${user} has used a command.`, iconURL: client.user.avatarURL({ dynamic: true }) })
-        .setTitle(`${client.user.username} Command Logger`)
-        .addFields({ name: 'Server Name', value: `${server}` })
-        .addFields({ name: 'Command', value: `\`\`\`${message.content}\`\`\`` })
-        .addFields({ name: 'User', value: `${user} | ${userID}` })
+        .setAuthor({ name: `${user} ha usado un comando.`, iconURL: client.user.avatarURL({ dynamic: true }) })
+        .setTitle(`${client.user.username} Registro de Comandos`)
+        .addFields({ name: 'Nombre del Servidor', value: `${server}` })
+        .addFields({ name: 'Comando', value: `\`\`\`${message.content}\`\`\`` })
+        .addFields({ name: 'Usuario', value: `${user} | ${userID}` })
         .setTimestamp()
-        .setFooter({ text: `Command Logger ${client.config.devBy}`, iconURL: message.author.avatarURL({ dynamic: true }) })
+        .setFooter({ text: `Registro de Comandos ${client.config.devBy}`, iconURL: message.author.avatarURL({ dynamic: true }) })
 
         await channel.send({ embeds: [embed] });
-        console.log(`${color.purple}[${getTimestamp()}]${color.reset} [PREFIX_COMMAND_USED] ${user} has used a command. \n${color.purple}> Server: ${server} \n> Command: ${message.content} \n> User: ${user} \n> UserID: ${userID}`)
+        console.log(`${color.purple}[${getTimestamp()}]${color.reset} [PREFIX_COMMAND_USED] ${user} ha usado un comando. \n${color.purple}> Servidor: ${server} \n> Comando: ${message.content} \n> Usuario: ${user} \n> ID del Usuario: ${userID}`)
     } catch (error) {
-        client.logs.error(`[PREFIX_COMMAND_USED] Error while logging command usage. Check if you have the correct channel ID in your config.`);
+        client.logs.error(`[PREFIX_COMMAND_USED] Error al registrar el uso del comando. Verifica si tienes el ID de canal correcto en tu configuración.`);
     }};
 });
