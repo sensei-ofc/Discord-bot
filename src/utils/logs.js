@@ -7,7 +7,7 @@ const color = {
     green: '\x1b[32m',
     blue: '\x1b[34m',
     pink: '\x1b[38;5;213m',
-    torquise: '\x1b[38;5;45m',
+    turquoise: '\x1b[38;5;45m',
     reset: '\x1b[0m'
 }
 
@@ -62,4 +62,4 @@ function logging(message) {
     return write(message, `${color.pink}[${getTimestamp()}]${color.reset} `);
 }
 
-module.exports = { getTimestamp, write, info, warn, error, success, debug, logging, color};
+module.exports = { getTimestamp, write, info, warn, error, success, debug, logging, color };
