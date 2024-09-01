@@ -42,29 +42,29 @@ module.exports = {
 
                 const embed = new EmbedBuilder()
                 .setColor("Red")
-                .setTitle(`${client.user.username} prefix system`)
-                .setDescription(`> The command you tried **does not exist**. \n> To see **all** commands, use \`\`${client.config.prefix}help\`\``);
+                .setTitle(`Sistema de prefijos de ${client.user.username}`)
+                .setDescription(`> El comando que intentaste usar **no existe**. \n> Para ver **todos** los comandos, usa \`\`${client.config.prefix}help\`\``);
 
                 return message.reply({ embeds: [embed], ephemeral: true});
             } catch (error) {
-                client.logs.error(`[PREFIX_ERROR] Error sending 'cannot find prefix' embed.`, error);
+                client.logs.error(`[PREFIX_ERROR] Error al enviar el embed de 'prefijo no encontrado'.`, error);
             };
         };
 
         if (!command) return;
 
         if (command.args && !args.length) {
-            return message.reply(`You **didn't** provide any \`\`arguments\`\`.`);
+            return message.reply(`No proporcionaste ningún \`\`argumento\`\`.`);
         }
 
         try {
             command.execute(message, client, args);
         } catch (error) {
-            console.error(`${color.red}[${getTimestamp()}] [MESSAGE_CREATE] Error while executing command. \n${color.red}[${getTimestamp()}] [MESSAGE_CREATE] Please check you are using the correct execute method: "async execute(message, client, args)":`, error);
+            console.error(`${color.red}[${getTimestamp()}] [MESSAGE_CREATE] Error al ejecutar el comando. \n${color.red}[${getTimestamp()}] [MESSAGE_CREATE] Por favor, verifica que estás usando el método correcto de ejecución: "async execute(message, client, args)":`, error);
 
             const embed = new EmbedBuilder()
             .setColor("Red")
-            .setDescription(`There was an error while executing this command!\n\`\`\`${error}\`\`\``)
+            .setDescription(`¡Hubo un error al ejecutar este comando!\n\`\`\`${error}\`\`\``)
 
             await message.reply({ embeds: [embed], ephemeral: true});
         }
